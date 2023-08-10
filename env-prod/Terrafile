@@ -24,5 +24,5 @@ alb:
     version: "main"
 
 eks:
-  source: "https://github.com/r-devops/tf-module-eks.git"
+  source: "https://github.com/vamsi113/tf-module-eks.git"
   version: "main"

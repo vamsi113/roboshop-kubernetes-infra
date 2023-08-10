@@ -40,6 +40,7 @@ module "docdb" {
   for_each            = var.docdb
   source              = "./vendor/modules/docdb"
   engine              = each.value.engine
+  engine_version      = each.value.engine_version
   name                = each.key
   env                 = var.env
   subnets             = flatten([for i, j in module.vpc : j.private_subnets["database"]["subnets"][*].id])

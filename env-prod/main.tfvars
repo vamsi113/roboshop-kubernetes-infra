@@ -111,6 +111,7 @@ rabbitmq = {
   }
 }
 
+
 #apps = {
 #  frontend = {
 #    instance_type       = "t3.micro"
@@ -184,3 +185,13 @@ alb = {
 ACM_ARN = "arn:aws:acm:us-east-1:542712333710:certificate/d8e94121-7b28-42b7-873c-a7c071b1bd80"
 
 
+eks = {
+  prod = {
+    DESIRED_SIZE            = 1
+    MAX_SIZE                = 1
+    MIN_SIZE                = 1
+    CREATE_ALB_INGRESS      = false
+    CREATE_EXTERNAL_SECRETS = false
+    INSTALL_KUBE_METRICS    = false
+  }
+}

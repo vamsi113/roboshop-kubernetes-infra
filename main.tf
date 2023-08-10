@@ -100,6 +100,20 @@ module "rabbitmq" {
   vpc_cidr        = element([for i, j in module.vpc : j.vpc_cidr], 0)
 }
 
+module "EKS" {
+  source                  = "./vendor/modules/eks/"
+  ENV                     = var.env
+  PRIVATE_SUBNET_IDS      = flatten([for i, j in module.vpc : j.private_subnets["database"]["subnets"][*].id])
+  PUBLIC_SUBNET_IDS       = flatten([for i, j in module.vpc : j.public_subnets["public"]["subnets"][*].id])
+  DESIRED_SIZE            = 1
+  MAX_SIZE                = 1
+  MIN_SIZE                = 1
+  CREATE_ALB_INGRESS      = false
+  CREATE_EXTERNAL_SECRETS = true
+  INSTALL_KUBE_METRICS    = true
+  CREATE_SCP              = false
+  CREATE_NGINX_INGRESS    = true
+}
 #module "app" {
 #  depends_on = [module.vpc, module.rabbitmq, module.elasticache, module.docdb, module.alb, module.rds]
 #  source     = "./vendor/modules/app-setup"
